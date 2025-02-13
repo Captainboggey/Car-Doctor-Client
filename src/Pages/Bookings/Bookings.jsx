@@ -8,13 +8,11 @@ const Bookings = () => {
     useEffect(()=>{
         fetch(url)
         .then(res=>res.json())
-        .then(data=>{
-            console.log(data)
-        })
+        .then(data=>setBookings(data))
     },[])
     return (
         <div>
-            
+            <h2 className="text-5xl">Your Bookings: {bookings.length}</h2>
         </div>
     );
 };
