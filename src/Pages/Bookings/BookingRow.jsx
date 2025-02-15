@@ -1,19 +1,10 @@
 
 
 
-const BookingRow = ({ booking }) => {
-    const { date, service, price, img,_id } = booking
+const BookingRow = ({ booking,handleDelete,handleConfirm }) => {
+    const { date, service, price, img,_id,status} = booking
 
-    const handleDelete = id =>{
-        const proceed = confirm('Are you sure you want to delete');
-        if(proceed){
-           fetch(``)
-           .then(res=>res.json())
-           .then(data=>{
-            console.log(data);
-           })
-        }
-    }
+    
 
     return (
         <tr>
@@ -53,7 +44,9 @@ const BookingRow = ({ booking }) => {
             </td>
             <td>{date}</td>
             <th>
-                <button className="btn btn-ghost btn-xs">details</button>
+               {
+                status ==='confirm'? <span className="font-bold text-primary">Confirmed</span>    : <button onClick={()=> handleConfirm(_id)}  className="btn btn-ghost btn-xs">Please Confirm</button>
+               }
             </th>
         </tr>
     );
