@@ -20,26 +20,26 @@ const Bookings = () => {
                     <thead>
                         <tr>
                             <th>
-                                <label>
-                                    <input type="checkbox" className="checkbox" />
-                                </label>
+                                
+                               
                             </th>
-                            <th>Name</th>
-                            <th>Job</th>
-                            <th>Favorite Color</th>
-                            <th></th>
+                            <th>Image</th>
+                            <th>Service</th>
+                            <th>Date</th>
+                            <th>Price</th>
+                            <th>Status</th>
                         </tr>
                     </thead>
                     <tbody>
                         {/* row 1 */}
                         {
-                            bookings.map(booking=><BookingRow booking={booking} key={booking._id}></BookingRow>)
+                            bookings.map(booking => <BookingRow booking={booking} key={booking._id}></BookingRow>)
                         }
-                      
-                    
+
+
                     </tbody>
                     {/* foot */}
-                    
+
                 </table>
             </div>
         </div>
