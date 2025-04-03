@@ -15,9 +15,9 @@ const Login = () => {
         signIn(email,password)
         .then(res=>{
             const user =res.user;
-            console.log(user)
+            // console.log(user)
         })
-        .catch(error=>console.log(error))
+        // .catch(error=>console.log(error))
 
     }
     return (

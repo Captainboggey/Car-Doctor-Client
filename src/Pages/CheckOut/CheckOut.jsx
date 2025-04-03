@@ -22,7 +22,7 @@ const CheckOut = () => {
             price: price,
 
         }
-        fetch('http://localhost:5000/bookings',{
+        fetch('https://car-doctor-server-4.vercel.app/bookings',{
             method: "POST",
             headers:{
                 "content-type":"application/json"
@@ -31,7 +31,7 @@ const CheckOut = () => {
         })
         .then(res=>res.json())
         .then(data=>{
-            console.log(data)
+            // console.log(data)
             if(data.insertedId){
                 alert("Booking Added Successfully!")
             }

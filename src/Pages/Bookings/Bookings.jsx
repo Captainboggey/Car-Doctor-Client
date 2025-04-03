@@ -1,25 +1,31 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../Providers/AuthProvider';
 import BookingRow from './BookingRow';
+import useAxiosSecure from '../../Hooks/useAxiosSecure';
 
 const Bookings = () => {
     const { user } = useContext(AuthContext);
     const [bookings, setBookings] = useState([])
-    const url = `http://localhost:5000/bookings?email=${user?.email}`
+    const axiosSecure = useAxiosSecure()
+    const url = `/bookings?email=${user?.email}`
     useEffect(() => {
-        fetch(url)
-            .then(res => res.json())
-            .then(data => setBookings(data))
+        // fetch(url,{credentials:'include'})
+        //     .then(res => res.json())
+        //     .then(data => setBookings(data))
+          axiosSecure.get(url)
+          .then(res=>setBookings(res?.data))
+          .catch(error =>console.log(error))
+
     }, [])
     const handleDelete = id =>{
         const proceed = confirm('Are you sure you want to delete');
         if(proceed){
-           fetch(`http://localhost:5000/bookings/${id}`,{
+           fetch(`https://car-doctor-server-4.vercel.app/bookings/${id}`,{
             method:"DELETE"
            })
            .then(res=>res.json())
            .then(data=>{
-            console.log(data);
+            // console.log(data);
             if(data.deletedCount>0){
                 alert("deleted successfully")
                 const remaining = bookings.filter(booking=> booking._id !== id)
@@ -30,7 +36,7 @@ const Bookings = () => {
     }
 
     const handleConfirm = id =>{
-        fetch(`http://localhost:5000/bookings/${id}`,{
+        fetch(`https://car-doctor-server-4.vercel.app/bookings/${id}`,{
             method:"PATCH",
             headers:{
                 "content-type": "application/json"
@@ -39,7 +45,7 @@ const Bookings = () => {
         })
         .then(res=>res.json())
         .then(data=>{
-            console.log(data)
+            // console.log(data)
             if(data.modifiedCount>0){
                 // update state
                 const remaining = bookings.filter(booking=>booking._id !== id);
